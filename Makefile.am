@@ -59,6 +59,11 @@ stegdeimage_LDADD = @LIBOBJS@ $(LIBS)
 xsteg_SOURCES = xsteg.c xsteg.h xsteg_xpm.c
 xsteg_LDADD = @LIBOBJS@ $(GTKLIB) $(EVENTLIB)
 
+
 DISTCLEANFILES = *~
 
 config.status:
+
+install-data-local:
+	mkdir -p "$(datadir)/stegbreak"
+	$(install_sh_DATA) rules.ini "$(datadir)/stegbreak/rules.ini"
