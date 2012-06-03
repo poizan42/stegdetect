@@ -135,7 +135,7 @@ buildDCThist(short *data, int x, int y)
 	sum = count = 0;
 	for (i = x; i < y; i++) {
 		if ((i & ~63) == i) {
-			if (debug & DBG_PRINTONES)
+			if (sd_debug & DBG_PRINTONES)
 				fprintf(stdout, "%d] %d\n", i, count);
 			sum += count;
 			count = 0;
@@ -159,7 +159,7 @@ buildDCThist(short *data, int x, int y)
 		DCThist[off + 128]++;
 	}
 
-	if (debug & DBG_PRINTHIST) {
+	if (sd_debug & DBG_PRINTHIST) {
 		for (i = 0; i < 256; i++) {
 			fprintf(stdout, "%4d: %8.1f\n", i - 128, DCThist[i]);
 		}
@@ -291,7 +291,7 @@ unify_outguess(float *hist, float *theo, float *obs, float *pdiscard)
 		 */
 		if ((fbar > f/4) &&
 		    ((f - f/3) - (fbar + f/3) > 0)) {
-			if ((debug & DBG_CHIDIFF) && (one || two))
+			if ((sd_debug & DBG_CHIDIFF) && (one || two))
 				fprintf(stdout,
 					"%4d: %8.3f - %8.3f skipped (%f)\n",
 					i*2 - 128,
@@ -356,7 +356,7 @@ chi2(float *DCTtheo, float *DCTobs, int size, float discard)
 		ymt += DCTobs[i];
 		ytt += DCTtheo[i];
 
-		if (debug & DBG_CHIDIFF) {
+		if (sd_debug & DBG_CHIDIFF) {
 			if (DCTobs[i] || DCTtheo[i])
 				fprintf(stdout, "%4d: %8.3f - %8.3f\n", i,
 					DCTobs[i],
@@ -368,7 +368,7 @@ chi2(float *DCTtheo, float *DCTobs, int size, float discard)
 			chi = ymt - ytt;
 
 
-			if (debug & DBG_CHICALC) {
+			if (sd_debug & DBG_CHICALC) {
 				fprintf(stdout,
 					"     (%8.3f - %8.3f)^2 = %8.3f / %8.3f = %8.3f | %8.3f\n",
 					ymt, ytt,
@@ -388,7 +388,7 @@ chi2(float *DCTtheo, float *DCTobs, int size, float discard)
 
 	f = 1 - chi2cdf(sumchi, dgf - 1);
 
-	if (debug & DBG_CHIEND) {
+	if (sd_debug & DBG_CHIEND) {
 		fprintf(stdout,
 			"Categories: %d, Chi: %f, Q: %f, dis: %f -> %f\n",
 			dgf, sumchi, f, discard, f * (1 - discard));
