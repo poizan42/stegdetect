@@ -12,6 +12,7 @@ if test "$prefix" = "NONE"; then
 fi
 
 dnl Checks for programs.
+AM_PROG_AS
 AC_PROG_CXX
 AC_PROG_CC
 AC_C_INLINE
